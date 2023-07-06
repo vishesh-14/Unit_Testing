@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Run the tests with code coverage
-./node_modules/.bin/nyc --reporter=lcov --reporter=text-lcov _mocha
+# Run the tests with code coverage using full path to Mocha executable
+./node_modules/.bin/nyc --reporter=lcov --reporter=text-lcov ./node_modules/.bin/mocha
 
 # Calculate the coverage percentage
 ./node_modules/.bin/nyc report --reporter=text-summary
