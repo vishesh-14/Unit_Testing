@@ -1,4 +1,4 @@
-const { add, sub } = require('../src/calculator');
+const { add } = require('../src/calculator');
 const assert = require('assert');
 
 describe('Calculator', () => {
