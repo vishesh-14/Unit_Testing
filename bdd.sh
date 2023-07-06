@@ -10,7 +10,7 @@ if [[ -z "${CHANGED_FILES}" ]]; then
 fi
 
 # Run code coverage for the changed files only
-./node_modules/.bin/nyc --reporter=lcov --reporter=text-lcov --include="${CHANGED_FILES}" _mocha
+./node_modules/.bin/nyc --reporter=lcov --reporter=text-lcov --include="${CHANGED_FILES}" ./node_modules/.bin/mocha
 
 # Calculate the coverage percentage
 ./node_modules/.bin/nyc report --reporter=text-summary
