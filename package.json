@@ -7,13 +7,14 @@
     "test": "test"
   },
   "scripts": {
-    "test": "istanbul cover _mocha -- -R spec",
+    "test": "istanbul cover _mocha -- -R mocha-junit-reporter",
     "coverage": "istanbul check-coverage --statement 50 --branch 50 --function 50 --line 50"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "istanbul": "^0.4.5",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "mocha-junit-reporter": "^2.2.0"
   }
 }
