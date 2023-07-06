@@ -17,7 +17,10 @@ THRESHOLD=50
 
 # Check the coverage threshold
 ACTUAL_COVERAGE=$(./node_modules/.bin/nyc report --reporter=text-summary | awk '{print $4}' | sed 's/%//')
-if (( $(echo "$ACTUAL_COVERAGE < $THRESHOLD" | bc -l) )); then
+COVERAGE_EXIT_STATUS=$?
+
+# If the coverage check fails or the coverage is below the threshold, abort the build
+if [ $COVERAGE_EXIT_STATUS -ne 0 ] || (( $(echo "$ACTUAL_COVERAGE < $THRESHOLD" | bc -l) )); then
   echo "Code coverage threshold of $THRESHOLD% not met. Aborting the build."
   exit 1
 fi

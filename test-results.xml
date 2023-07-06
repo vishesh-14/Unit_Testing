@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites name="Mocha Tests" time="0.002" tests="2" failures="0">
-  <testsuite name="Root Suite" timestamp="2023-07-06T11:06:52" tests="0" time="0.000" failures="0">
+  <testsuite name="Root Suite" timestamp="2023-07-06T11:22:51" tests="0" time="0.000" failures="0">
   </testsuite>
-  <testsuite name="Calculator" timestamp="2023-07-06T11:06:52" tests="2" file="/home/saivishesh/Desktop/codecoverage/test/calculator.test.js" time="0.001" failures="0">
+  <testsuite name="Calculator" timestamp="2023-07-06T11:22:51" tests="2" file="/home/saivishesh/Desktop/codecoverage/test/calculator.test.js" time="0.002" failures="0">
     <testcase name="Calculator should correctly add two numbers" time="0.000" classname="should correctly add two numbers">
     </testcase>
     <testcase name="Calculator should correctly sub two numbers" time="0.000" classname="should correctly sub two numbers">
