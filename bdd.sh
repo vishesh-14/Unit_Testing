@@ -11,3 +11,5 @@ fi
 
 # Run code coverage for the changed files only and generate the report
 ./node_modules/.bin/nyc --reporter=lcov --include="${CHANGED_FILES}" ./node_modules/.bin/mocha
+
+mv coverage/cobertura-coverage.xml ./test-results.xml
