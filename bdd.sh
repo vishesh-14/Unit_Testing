@@ -16,8 +16,11 @@ fi
 ./node_modules/.bin/nyc report --reporter=text-summary
 
 # Check the coverage threshold
-COVERAGE_THRESHOLD=$(./node_modules/.bin/nyc check-coverage --lines 50)
-if [ "$COVERAGE_THRESHOLD" != "All coverage thresholds met." ]; then
+./node_modules/.bin/nyc check-coverage --lines 50
+COVERAGE_EXIT_STATUS=$?
+
+# If the coverage check fails, abort the build
+if [ $COVERAGE_EXIT_STATUS -ne 0 ]; then
   echo "Code coverage threshold not met. Aborting the build."
-  exit 1
+  exit $COVERAGE_EXIT_STATUS
 fi
