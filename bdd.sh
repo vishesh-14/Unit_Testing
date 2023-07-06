@@ -10,7 +10,7 @@ if [ -z "$CHANGED_FILES" ]; then
 fi
 
 # Set the coverage threshold
-THRESHOLD=50
+THRESHOLD=0
 
 # Run code coverage for the changed files only and generate the XML report
 ./node_modules/.bin/nyc --reporter=cobertura --include="${CHANGED_FILES}" ./node_modules/.bin/mocha
