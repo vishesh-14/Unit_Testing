@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Get the list of changed files compared to the previous version
 CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
@@ -9,7 +9,8 @@ if [ -z "$CHANGED_FILES" ]; then
   exit 0
 fi
 
-# Run code coverage for the changed files only and generate the report
-./node_modules/.bin/nyc --reporter=lcov --include="${CHANGED_FILES}" ./node_modules/.bin/mocha
+# Run code coverage for the changed files only and generate the XML report
+istanbul cover _mocha -- -R mocha-junit-reporter
 
-mv coverage/cobertura-coverage.xml ./test-results.xml
+# Move the generated XML report to the root directory
+mv coverage/coverage.xml ./code-coverage.xml
