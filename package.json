@@ -1,0 +1,19 @@
+{
+  "name": "codecoverage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "istanbul cover _mocha -- -R spec",
+    "coverage": "istanbul check-coverage --statement 50 --branch 50 --function 50 --line 50"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "mocha": "^10.2.0"
+  }
+}
