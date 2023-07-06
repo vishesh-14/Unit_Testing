@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Get the list of changed files compared to the previous version
 CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
@@ -9,17 +9,18 @@ if [ -z "$CHANGED_FILES" ]; then
   exit 0
 fi
 
-# Run code coverage for the changed files only
-./node_modules/.bin/nyc --reporter=lcov --reporter=text-lcov --reporter=lcovonly --reporter=cobertura --include="**/*" --report-dir="./" ./node_modules/.bin/mocha
-# Calculate the coverage percentage
-./node_modules/.bin/nyc report --reporter=text-summary
+# Set the coverage threshold
+THRESHOLD=50
+
+# Run code coverage for the changed files only and generate the XML report
+./node_modules/.bin/nyc --reporter=cobertura --include="${CHANGED_FILES}" ./node_modules/.bin/mocha
 
 # Check the coverage threshold
-./node_modules/.bin/nyc check-coverage --lines 50
-COVERAGE_EXIT_STATUS=$?
-
-# If the coverage check fails, abort the build
-if [ $COVERAGE_EXIT_STATUS -ne 0 ]; then
-  echo "Code coverage threshold not met. Aborting the build."
-  exit $COVERAGE_EXIT_STATUS
+ACTUAL_COVERAGE=$(./node_modules/.bin/nyc report --reporter=text-summary | awk '{print $4}' | sed 's/%//')
+if (( $(echo "$ACTUAL_COVERAGE < $THRESHOLD" | bc -l) )); then
+  echo "Code coverage threshold of $THRESHOLD% not met. Aborting the build."
+  exit 1
 fi
+
+# Move the generated coverage report to the root directory with the desired name
+mv coverage/cobertura-coverage.xml ./code-coverage.xml
