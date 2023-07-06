@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 # Get the list of changed files compared to the previous version
 CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
 
 # If there are no changed files, exit the script with a success status
-if [[ -z "${CHANGED_FILES}" ]]; then
+if [ -z "$CHANGED_FILES" ]; then
   echo "No changed files detected. Skipping code coverage."
   exit 0
 fi
@@ -16,10 +16,8 @@ fi
 ./node_modules/.bin/nyc report --reporter=text-summary
 
 # Check the coverage threshold
-./node_modules/.bin/nyc check-coverage --lines 50 || EXIT_CODE=$?
-
-# If the coverage threshold is not met, abort the build
-if [[ $EXIT_CODE -ne 0 ]]; then
+COVERAGE_THRESHOLD=$(./node_modules/.bin/nyc check-coverage --lines 50)
+if [ "$COVERAGE_THRESHOLD" != "All coverage thresholds met." ]; then
   echo "Code coverage threshold not met. Aborting the build."
-  exit $EXIT_CODE
+  exit 1
 fi
