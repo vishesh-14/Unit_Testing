@@ -7,8 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "istanbul cover _mocha --report lcovonly -- -R spec && istanbul report --dir coverage/ --report lcov && istanbul report --dir coverage/ --report cobertura"
-
+"test": "istanbul cover _mocha --report lcovonly -- -R spec && istanbul report --dir coverage/ --report lcov && istanbul report --dir coverage/ --report cobertura && npx mocha-junit-reporter --reporter mocha-junit-reporter --reporter-options mochaFile=test-results.xml"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +15,7 @@
     "git": "^0.1.5",
     "istanbul": "^0.4.5",
     "junit": "^1.4.9",
+    "junit-viewer": "^4.11.1",
     "mocha": "^10.2.0",
     "mocha-junit-reporter": "^2.2.0",
     "nyc": "^15.1.0"
