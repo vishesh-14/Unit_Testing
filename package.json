@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-"test": "istanbul cover _mocha --report lcovonly -- -R spec && istanbul report --dir coverage/ --report lcov && istanbul report --dir coverage/ --report cobertura && npx mocha-junit-reporter --reporter mocha-junit-reporter --reporter-options mochaFile=test-results.xml"
+    "test:coverage": "nyc --reporter=html mocha"
   },
   "author": "",
   "license": "ISC",
@@ -21,13 +21,11 @@
     "nyc": "^15.1.0"
   },
   "nyc": {
-    "include": [
-      "src/*.js"
-    ],
-    "exclude": [
-      "test/*.js",
-      "node_modules",
-      "coverage"
-    ]
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 50,
+    "statements": 50,
+    "functions": 50,
+    "branches": 50
   }
 }
