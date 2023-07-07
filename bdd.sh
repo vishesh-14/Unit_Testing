@@ -10,7 +10,8 @@ if [ -z "$CHANGED_FILES" ]; then
 fi
 
 # Run code coverage for the changed files only and generate the XML report
-istanbul cover _mocha -- -R mocha-junit-reporter
+./node_modules/.bin/istanbul cover --include-all-sources --dir coverage --report cobertura --print none ./node_modules/.bin/_mocha -- -R mocha-junit-reporter
+
 
 # Move the generated XML report to the root directory
 mv coverage/coverage.xml ./code-coverage.xml
