@@ -15,7 +15,7 @@ fi
 # Calculate the coverage percentage for the changed files
 COVERAGE_THRESHOLD=50
 COVERAGE_RESULT=$(./node_modules/.bin/istanbul report --root coverage --include=$CHANGED_FILES lcov | grep -oP 'Lines[^%]*\K[0-9.]+')
-
+echo COVERAGE_RESULT
 # Check if coverage meets the threshold
 if (( $(echo "$COVERAGE_RESULT < $COVERAGE_THRESHOLD" | bc -l) )); then
   echo "Code coverage threshold of $COVERAGE_THRESHOLD% not met for changed files. Failing the build."
