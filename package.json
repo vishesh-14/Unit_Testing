@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "istanbul cover _mocha --report cobertura -- -R spec"
+    "test": "istanbul cover _mocha --report lcovonly -- -R spec && istanbul report --dir coverage/ --report lcov && istanbul report --dir coverage/ --report cobertura"
 
   },
   "author": "",
