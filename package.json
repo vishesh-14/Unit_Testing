@@ -7,16 +7,26 @@
     "test": "test"
   },
   "scripts": {
-    "test": "istanbul cover _mocha -- -R spec",
-    "coverage:xml": "istanbul report --report cobertura"
+    "test": "nyc mocha test/*.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "git": "^0.1.5",
     "istanbul": "^0.4.5",
+    "junit": "^1.4.9",
     "mocha": "^10.2.0",
     "mocha-junit-reporter": "^2.2.0",
     "nyc": "^15.1.0"
+  },
+  "nyc": {
+    "include": [
+      "src/*.js"
+    ],
+    "exclude": [
+      "test/*.js",
+      "node_modules",
+      "coverage"
+    ]
   }
 }
