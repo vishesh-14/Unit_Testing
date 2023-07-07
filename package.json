@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "istanbul cover _mocha -- -R mocha-junit-reporter",
+    "test": "istanbul cover _mocha -- -R spec",
     "coverage": "istanbul check-coverage --statement 50 --branch 50 --function 50 --line 50"
   },
   "author": "",
