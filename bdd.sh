@@ -10,12 +10,14 @@ if [ -z "$CHANGED_FILES" ]; then
 fi
 
 # Run code coverage for the changed files only and generate the XML report
-./node_modules/.bin/nyc --reporter=lcov --include="${CHANGED_FILES}" ./node_modules/.bin/mocha
+./node_modules/.bin/istanbul cover --include-all-sources --dir coverage --report cobertura --print none ./node_modules/.bin/_mocha -- -R mocha-junit-reporter
 
-# Check the coverage threshold
-THRESHOLD=50
-ACTUAL_COVERAGE=$(./node_modules/.bin/nyc report --reporter=text-summary | awk '{print $4}' | sed 's/%//')
-if [ "$(echo "$ACTUAL_COVERAGE < $THRESHOLD" | bc -l)" -eq 1 ]; then
-  echo "Code coverage threshold of $THRESHOLD% not met. Aborting the build."
+# Calculate the coverage percentage for the changed files
+COVERAGE_THRESHOLD=50
+COVERAGE_RESULT=$(./node_modules/.bin/istanbul report --root coverage --include=$CHANGED_FILES lcov | grep -oP 'Lines[^%]*\K[0-9.]+')
+
+# Check if coverage meets the threshold
+if (( $(echo "$COVERAGE_RESULT < $COVERAGE_THRESHOLD" | bc -l) )); then
+  echo "Code coverage threshold of $COVERAGE_THRESHOLD% not met for changed files. Failing the build."
   exit 1
 fi
